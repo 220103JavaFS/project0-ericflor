@@ -4,14 +4,14 @@ import java.util.Scanner;
 
 public abstract class User {
 
-    private String name;
+    private static String name;
     private int age;
     private String birthday;
     private int social;
-    private String username;
-    private String password;
+    private static String username;
+    private static String password;
 
-    public String getName() {
+    public static String getName() {
         return name;
     }
 

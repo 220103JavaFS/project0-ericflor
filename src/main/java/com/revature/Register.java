@@ -28,12 +28,41 @@ public class Register {
         System.out.println("Please enter a password for your profile");
         String password = scan.next();
 
-        //System.out.println("Are your registering as a customer, Teller, or Bank Manager?");
-        // if customer, create new object for customer filling in provided data
-        // if teller, create new object for teller filling in provided data, etc.
-        Customer newCust = new Customer(name, age, birthday, social, username, password);
-        System.out.println("Your new profile information is: ");
-        newCust.listProfile();
-        System.out.println("Thank you for registering");
+        System.out.println("What kind of profile would you like to open?");
+        System.out.println("1. Customer");
+        System.out.println("2. Teller");
+        System.out.println("3. Manager");
+
+        int profile = scan.nextInt();
+
+        if (profile == 1){
+            Customer newCust = new Customer(name, age, birthday, social, username, password);
+            System.out.println("Your new profile information is: ");
+            newCust.listProfile();
+            System.out.println("Thank you for registering");
+            System.out.println("Please login to view your accounts or apply to open a new one");
+            LogIn newLogIn = new LogIn();
+            newLogIn.LogIn();
+        } else if (profile == 2){
+            Teller newTeller = new Teller(name, age, birthday, social, username, password);
+            System.out.println("Your new profile information is: ");
+            newTeller.listProfile();
+            System.out.println("Thank you for registering");
+            System.out.println("Please login to view your accounts or apply to open a new one");
+            LogIn newLogIn = new LogIn();
+            newLogIn.LogIn();
+        } else if (profile == 3){
+            Manager newManager = new Manager(name, age, birthday, social, username, password);
+            System.out.println("Your new profile information is: ");
+            newManager.listProfile();
+            System.out.println("Thank you for registering");
+            System.out.println("Please login to view your accounts or apply to open a new one");
+            LogIn newLogIn = new LogIn();
+            newLogIn.LogIn();
+        }
+
+
+
+
     }
 }

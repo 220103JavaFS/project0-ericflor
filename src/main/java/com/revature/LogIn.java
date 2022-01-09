@@ -14,7 +14,7 @@ public class LogIn {
         String password = sc.next();
         // if else statement to check if password is correct
         // if credentials are correct pull up specific user profile
-
+        Customer.customerInfo();
     }
 
     public void LogOut(){
