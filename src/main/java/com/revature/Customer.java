@@ -18,19 +18,26 @@ public class Customer extends User{
         System.out.println("Password: " + getPassword());
     }
 
-    public static void customerInfo(){
+    public static void customerInfo() {
         System.out.println("Name: " + getName());
+        // if customer has open accounts in database, do the below
         System.out.println("Select an account to move funds");
         System.out.println("Enter 1: Checking --- Balance: $" + Checking.getBalance());
         System.out.println("Enter 2: Savings --- Balance: $" + Savings.getBalance());
+        System.out.println("Enter 3: Exit");
         //System.out.println("Enter 3: Joint");
         Scanner scan = new Scanner(System.in);
         int choice = scan.nextInt();
 
-        if (choice == 1){
-            Checking.display();
-        } else if (choice == 2){
-            Savings.display();
+        while (choice != 3){
+            if (choice == 1) {
+                Checking.display();
+            } else if (choice == 2) {
+                Savings.display();
+            } break;
         }
+        // else ask them to open an account
+        Application newApply = new Application();
+        newApply.openAccount();
     }
 }

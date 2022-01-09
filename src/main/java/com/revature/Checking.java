@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Checking extends Accounts{
 
     public Checking(float balance) {
-        super(balance);
+        this.setBalance(0);
     }
 
     public static void display(){
@@ -31,6 +31,7 @@ public class Checking extends Accounts{
             float amount = scan.nextFloat();
             // apply logic here to transfer funds to savings
         }
+        Customer.customerInfo();
     }
 
 

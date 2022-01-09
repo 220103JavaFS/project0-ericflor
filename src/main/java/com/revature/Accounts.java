@@ -7,6 +7,10 @@ public abstract class Accounts {
     private static float balance = 0;
     private static float amount = 0;
 
+    public Accounts(){
+
+    }
+
     public Accounts(float balance) {
         this.balance = balance;
     }

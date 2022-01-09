@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Savings extends Accounts{
 
     public Savings(float balance) {
-        super(balance);
+        this.setBalance(0);
     }
 
     public static void display(){
@@ -18,18 +18,19 @@ public class Savings extends Accounts{
 
         Scanner scan = new Scanner(System.in);
 
-        int num = scan.nextInt();
+        int sc = scan.nextInt();
 
-        if (num == 1){
+        if (sc == 1){
             System.out.println("How much would you like to deposit?");
             deposit();
-        } else if (num == 2){
+        } else if (sc == 2){
             System.out.println("How much would you like to withdraw?");
             withdraw();
-        } else if (num == 3){
+        } else if (sc == 3){
             System.out.println("How much would you like to transfer?");
             float amount = scan.nextFloat();
             // apply logic here to transfer funds to checking
         }
+        Customer.customerInfo();
     }
 }
