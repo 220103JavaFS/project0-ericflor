@@ -18,10 +18,12 @@ public class Application {
 
         if (num == 1){
             Checking check = new Checking(0);
+            Customer.customerInfo();
         } else if (num == 2){
             Savings save = new Savings(0);
+            Customer.customerInfo();
         } else if (num == 3){
-
+            // open new joint account
         }
     }
 }

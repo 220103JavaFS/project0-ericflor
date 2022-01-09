@@ -31,9 +31,9 @@ public class Customer extends User{
 
         while (choice != 3){
             if (choice == 1) {
-                Checking.display();
+                Checking.displayChecking();
             } else if (choice == 2) {
-                Savings.display();
+                Savings.displaySavings();
             } break;
         }
         // else ask them to open an account

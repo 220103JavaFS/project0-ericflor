@@ -8,7 +8,7 @@ public class Checking extends Accounts{
         this.setBalance(0);
     }
 
-    public static void display(){
+    public static void displayChecking(){
         System.out.println("Checking Account");
         System.out.println("Your balance is: $" + getBalance());
         System.out.println("What would you like to do? ");
@@ -22,10 +22,10 @@ public class Checking extends Accounts{
 
         if (num == 1){
             System.out.println("How much would you like to deposit?");
-            deposit();
+            Checking.deposit();
         } else if (num == 2){
             System.out.println("How much would you like to withdraw?");
-            withdraw();
+            Checking.withdraw();
         } else if (num == 3){
             System.out.println("How much would you like to transfer?");
             float amount = scan.nextFloat();

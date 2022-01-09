@@ -8,7 +8,7 @@ public class Savings extends Accounts{
         this.setBalance(0);
     }
 
-    public static void display(){
+    public static void displaySavings(){
         System.out.println("Savings Account");
         System.out.println("Your balance is: $" + getBalance());
         System.out.println("What would you like to do? ");
@@ -22,10 +22,10 @@ public class Savings extends Accounts{
 
         if (sc == 1){
             System.out.println("How much would you like to deposit?");
-            deposit();
+            Savings.deposit();
         } else if (sc == 2){
             System.out.println("How much would you like to withdraw?");
-            withdraw();
+            Savings.withdraw();
         } else if (sc == 3){
             System.out.println("How much would you like to transfer?");
             float amount = scan.nextFloat();
