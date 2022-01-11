@@ -1,32 +1,33 @@
 package com.revature;
 
-import java.util.Scanner;
+import com.revature.controllers.CheckingController;
+import com.revature.controllers.Controller;
+import com.revature.controllers.CustomerController;
+import io.javalin.Javalin;
 
 public class Driver {
 
+    private static Javalin driver;
+
     public static void main(String[] args) {
+        driver = Javalin.create();
 
-        Scanner sc = new Scanner(System.in);
+//        driver.get("/hello", ((ctx) -> {
+//            String url = ctx.url();
+//            System.out.println(url);
+//            ctx.html("<h1> Hello Javalin </h1>");
+//            ctx.status(200);
+//        }));
+        configure(new CheckingController());
+        configure(new CustomerController());
+        driver.start(7000);
+    }
 
-        System.out.println("What would you like to do?");
-        System.out.println("Enter 1. Login");
-        System.out.println("Enter 2. Register");
-        System.out.println("Enter 3. Exit");
+    public static void configure(Controller... controllers){
 
-        int menu = sc.nextInt();
-
-        while (menu != 3) {
-            if (menu == 1) {
-                LogIn enter = new LogIn();
-                enter.LogIn();
-                menu = 0;
-            } else if (menu == 2) {
-                    Register newReg = new Register();
-                    newReg.register();
-                    menu = 0;
-            } else {
-                break;
-            }
+        for (Controller c: controllers){
+            c.addRoutes(driver);
         }
     }
 }
+
