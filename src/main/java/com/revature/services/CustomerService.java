@@ -1,15 +1,23 @@
 package com.revature.services;
 
-import com.revature.Models.Customer;
-import com.revature.dao.CustomerDAO;
+import com.revature.models.accounts.Checking;
+import com.revature.models.users.AccountRequest;
+import com.revature.models.users.Customer;
+import com.revature.repos.CustomerDAO;
+import com.revature.repos.CustomerDAOImpl;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class CustomerService {
 
-    public CustomerDAO customerDAO = new CustomerDAO();
+    private CustomerDAO customerDAO = new CustomerDAOImpl();
 
-    public ArrayList<Customer> listAllCustomers(){
-        return customerDAO.getAllCustomers();
+    public boolean addCustomer(Customer customer){
+        return customerDAO.addCustomer(customer);
     }
+
+    public boolean requestAccount(AccountRequest request){
+        return customerDAO.accountRequest(request);
+    }
+
 }
