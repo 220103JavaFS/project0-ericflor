@@ -6,6 +6,8 @@ import com.revature.services.CustomerService;
 import io.javalin.Javalin;
 import io.javalin.http.Handler;
 
+import static com.revature.Roles.Role.CUSTOMER;
+
 public class CustomerController extends Controller{
 
     private CustomerService customerService = new CustomerService();
@@ -43,7 +45,8 @@ public class CustomerController extends Controller{
     public void addRoutes(Javalin app) {
 
         app.post("/customer/register", newCustomer);
-        app.post("/request", newRequest);
+        app.post("/customer/request", newRequest);
+       // app.post("/customer/request", newRequest, CUSTOMER); // how to do this?
 
 
 

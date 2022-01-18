@@ -6,6 +6,8 @@ import com.revature.services.ManagerService;
 import io.javalin.Javalin;
 import io.javalin.http.Handler;
 
+import static com.revature.Roles.Role.MANAGER;
+
 public class ManagerController extends Controller{
 
     private ManagerService managerService = new ManagerService();
@@ -77,6 +79,7 @@ public class ManagerController extends Controller{
     public void addRoutes(Javalin app) {
 
         app.get("/managers/requests", getRequests);
+        //app.get("/managers/requests", getRequests, MANAGER); // how to do this????
         app.get("/managers", getManagers);
         app.post("/managers/checking", addChecking);
         app.get("/managers/checking", getChecking);

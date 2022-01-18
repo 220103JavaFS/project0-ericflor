@@ -14,12 +14,12 @@ public class CustomerDAOImpl implements CustomerDAO{
     @Override
     public boolean addCustomer(Customer customer) {
         try (Connection conn = ConnectionUtil.getConnection()) {
-            //since we're updating information with something from a user, we want to use a prepared statement
+
             String sql = "INSERT INTO customers (ssn, first_name, last_name, user_name, pass_word) " +
-                    "VALUES (?, ?, ?, ?, ?);"; //don't update residents here as that is covered by our internal trigger
+                    "VALUES (?, ?, ?, ?, ?);";
             PreparedStatement statement = conn.prepareStatement(sql);
 
-            //auto incrementing a count variable makes it easier to keep track of things here without needing a loop
+
             int count = 0;
             statement.setString(++count, customer.getSsn());
             statement.setString(++count, customer.getFirstName());
