@@ -1,8 +1,7 @@
 package com.revature.models.users;
 
-
-import com.revature.models.accounts.Checking;
-import com.revature.models.accounts.Savings;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Objects;
 
@@ -14,6 +13,8 @@ public class Customer extends User {
     // private Checking checking;
     //private Savings savings;
 
+    protected static Logger log = LoggerFactory.getLogger(User.class);
+
     public Customer (){
 
     }
@@ -24,6 +25,7 @@ public class Customer extends User {
         this.firstName = firstName;
         this.lastName = lastName;
     }
+
 
 //    public Customer(String username, String password, String ssn, String firstName, String lastName, Checking checking, Savings savings) {
 //        super(username, password);

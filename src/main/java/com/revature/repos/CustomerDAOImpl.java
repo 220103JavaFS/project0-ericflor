@@ -57,4 +57,25 @@ public class CustomerDAOImpl implements CustomerDAO{
         }
     }
 
+    @Override
+    public boolean encryptPassword(Customer customer) {
+        try(Connection conn = ConnectionUtil.getConnection()){
+            String sql = "UPDATE customers SET pass_word = ? WHERE user_name = ?;";
+
+            PreparedStatement statement = conn.prepareStatement(sql);
+
+            statement.setString(1, customer.getPassword());
+            statement.setString(2, customer.getUsername());
+
+
+            statement.execute();
+
+            return true;
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return false;
+    }
+
 }

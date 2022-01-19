@@ -1,14 +1,16 @@
 package com.revature.controllers;
 
 import com.revature.models.users.User;
-import com.revature.models.users.UserDTO;
 import com.revature.services.LoginService;
 import io.javalin.Javalin;
 import io.javalin.http.Handler;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 public class LoginController extends Controller {
+
+    protected static Logger log = LoggerFactory.getLogger(LoginController.class);
 
     LoginService loginService = new LoginService();
 
@@ -19,6 +21,7 @@ public class LoginController extends Controller {
             ctx.req.getSession(); //This will return an HttpSession object. If none exists then a new one will be created
             //and a cookie will be added to the response for the client to store.
             ctx.status(200);
+            log.info("Successfully logged in");
         }else {
             ctx.req.getSession().invalidate(); //invalidates any open session that is attached to the client that sent invalid credentials.
             ctx.status(401);
@@ -27,12 +30,11 @@ public class LoginController extends Controller {
 
 
     private Handler logout = (ctx) -> {
-        if(ctx.req.getSession(false) == null) {
-            ctx.status(400); //cannot log out if you never logged in the first place
-        } else {
-            ctx.req.getSession().invalidate();
-            ctx.status(200);
-        }
+
+        ctx.req.getSession().invalidate();
+        ctx.status(200);
+        log.info("Successfully logged out");
+
     };
 
 

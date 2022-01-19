@@ -3,12 +3,18 @@ package com.revature.controllers;
 import com.revature.models.accounts.Checking;
 import com.revature.models.accounts.Savings;
 import com.revature.models.users.Customer;
+import com.revature.models.users.Manager;
+import com.revature.models.users.User;
 import com.revature.services.ManagerService;
 import io.javalin.Javalin;
 import io.javalin.http.Handler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 public class ManagerController extends Controller{
+
+    protected static Logger log = LoggerFactory.getLogger(ManagerController.class);
 
     private ManagerService managerService = new ManagerService();
 
@@ -17,6 +23,7 @@ public class ManagerController extends Controller{
             //sent a cookie along with the request that matches an open session.
             ctx.json(managerService.showAllRequests());
             ctx.status(200);
+            log.info("The list of account requests");
         }else {
             ctx.status(401);
         }
@@ -27,6 +34,7 @@ public class ManagerController extends Controller{
             //sent a cookie along with the request that matches an open session.
             ctx.json(managerService.findAllManagers());
             ctx.status(200);
+            log.info("The list of managers");
         }else {
             ctx.status(401);
         }
@@ -37,6 +45,7 @@ public class ManagerController extends Controller{
             Checking checking = ctx.bodyAsClass(Checking.class);
             if(managerService.addCustomerChecking(checking)){
                 ctx.status(201);
+                log.info("Successfully approved customer checking account");
             }else {
                 ctx.status(400);
             }
@@ -50,6 +59,7 @@ public class ManagerController extends Controller{
             Savings savings = ctx.bodyAsClass(Savings.class);
             if(managerService.addCustomerSavings(savings)){
                 ctx.status(201);
+                log.info("Successfully approved customer savings account");
             }else {
                 ctx.status(400);
             }
@@ -63,6 +73,7 @@ public class ManagerController extends Controller{
             //sent a cookie along with the request that matches an open session.
             ctx.json(managerService.findAllChecking());
             ctx.status(200);
+            log.info("List of all customer checking accounts");
         }else {
             ctx.status(401);
         }
@@ -72,6 +83,7 @@ public class ManagerController extends Controller{
         if(ctx.req.getSession(false)!=null) {
             ctx.json(managerService.findAllSavings());
             ctx.status(200);
+            log.info("List of all customer savings accounts");
         }else {
             ctx.status(401);
         }
@@ -83,6 +95,7 @@ public class ManagerController extends Controller{
            Savings savings = ctx.bodyAsClass(Savings.class);
             if(managerService.deleteCustomerSavings(savings)){
                 ctx.status(201);
+                log.info("Successfully deleted customer savings account");
             }else {
                 ctx.status(400);
             }
@@ -97,6 +110,7 @@ public class ManagerController extends Controller{
             Checking checking = ctx.bodyAsClass(Checking.class);
             if(managerService.deleteCustomerChecking(checking)){
                 ctx.status(201);
+                log.info("Successfully deleted customer checking account");
             }else {
                 ctx.status(400);
             }
@@ -109,6 +123,7 @@ public class ManagerController extends Controller{
         if(ctx.req.getSession(false)!=null) {
             ctx.json(managerService.findAllCustomers());
             ctx.status(200);
+            log.info("The list of all the customers");
         }else {
             ctx.status(401);
         }

@@ -5,8 +5,12 @@ import com.revature.models.accounts.Savings;
 import com.revature.services.TellerService;
 import io.javalin.Javalin;
 import io.javalin.http.Handler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class TellerController extends Controller {
+
+    protected static Logger log = LoggerFactory.getLogger(TellerController.class);
 
     private TellerService tellerService = new TellerService();
 
@@ -16,6 +20,7 @@ public class TellerController extends Controller {
             Checking checking = ctx.bodyAsClass(Checking.class);
             if(tellerService.withdrawChecking(checking)){
                 ctx.status(201);
+                log.info("Successfully made a withdrawal from checking");
             }else {
                 ctx.status(400);
             }
@@ -30,6 +35,7 @@ public class TellerController extends Controller {
             Savings savings = ctx.bodyAsClass(Savings.class);
             if(tellerService.withdrawSavings(savings)){
                 ctx.status(201);
+                log.info("Successfully made a withdrawal from savings");
             }else {
                 ctx.status(400);
             }
@@ -44,6 +50,7 @@ public class TellerController extends Controller {
             Savings saving = ctx.bodyAsClass(Savings.class);
             if(tellerService.depositSavingsProcedure(saving)){
                 ctx.status(201);
+                log.info("Successfully made a deposit into savings");
             }else {
                 ctx.status(400);
             }
@@ -58,6 +65,7 @@ public class TellerController extends Controller {
             Checking checkings = ctx.bodyAsClass(Checking.class);
             if(tellerService.depositCheckingProcedure(checkings)){
                 ctx.status(201);
+                log.info("Successfully made a deposit into checking");
             }else {
                 ctx.status(400);
             }

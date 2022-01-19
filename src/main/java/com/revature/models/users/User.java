@@ -1,5 +1,7 @@
 package com.revature.models.users;
 
+import org.springframework.security.crypto.bcrypt.BCrypt;
+
 public class User {
 
     private String username;
@@ -11,7 +13,7 @@ public class User {
 
     public User(String username, String password) {
         this.username = username;
-        this.password = password;
+        this.password = BCrypt.hashpw(password, BCrypt.gensalt());
     }
 
     public String getUsername() {

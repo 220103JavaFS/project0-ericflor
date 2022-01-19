@@ -14,4 +14,6 @@ public interface CustomerDAO {
 
     public boolean accountRequest(AccountRequest request);
 
+    public boolean encryptPassword(Customer customer);
+
 }
