@@ -41,9 +41,11 @@ public class CustomerController extends Controller{
                 log.info("Created new account request");
             }else {
                 ctx.status(400);
+                log.warn("Customer doesn't exist in database, please register first");
             }                           // put some logback here with message about since ssn not in registered
         }else{                          // customers, can't request account, please register
             ctx.status(401);
+            log.warn("Customer doesn't exist in database, please register first");
         }
     };
 

@@ -25,6 +25,7 @@ public class LoginController extends Controller {
         }else {
             ctx.req.getSession().invalidate(); //invalidates any open session that is attached to the client that sent invalid credentials.
             ctx.status(401);
+            log.warn("Invalid credentials!");
         }
     };
 

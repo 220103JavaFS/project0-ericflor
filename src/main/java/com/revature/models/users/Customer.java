@@ -13,7 +13,6 @@ public class Customer extends User {
     // private Checking checking;
     //private Savings savings;
 
-    protected static Logger log = LoggerFactory.getLogger(User.class);
 
     public Customer (){
 

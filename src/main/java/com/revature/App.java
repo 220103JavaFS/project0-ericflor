@@ -16,6 +16,7 @@ public class App {
         configure(new CustomerController(), new LoginController(), new ManagerController(), new TellerController());
 
         app.start(7000);
+        log.info("started the app!");
     }
 
     public static void configure(Controller... controllers){
