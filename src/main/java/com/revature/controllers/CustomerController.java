@@ -6,7 +6,6 @@ import com.revature.services.CustomerService;
 import io.javalin.Javalin;
 import io.javalin.http.Handler;
 
-import static com.revature.Roles.Role.CUSTOMER;
 
 public class CustomerController extends Controller{
 
@@ -34,8 +33,8 @@ public class CustomerController extends Controller{
                 ctx.status(201);
             }else {
                 ctx.status(400);
-            }
-        }else{
+            }                           // put some logback here with message about since ssn not in registered
+        }else{                          // customers, can't request account, please register
             ctx.status(401);
         }
     };
@@ -44,11 +43,9 @@ public class CustomerController extends Controller{
     @Override
     public void addRoutes(Javalin app) {
 
-        app.post("/customer/register", newCustomer);
-        app.post("/customer/request", newRequest);
+        //app.post("/register", newCustomer, Role.CUSTOMER); // how to do this?
+        app.post("/register", newCustomer);
+        app.post("/request", newRequest);
        // app.post("/customer/request", newRequest, CUSTOMER); // how to do this?
-
-
-
     }
 }

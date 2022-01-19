@@ -10,6 +10,7 @@ public class Checking {
     private String customerSSN;
     private String customerFirstName;
     private String customerLastName;
+    private double amount;
 
     public Checking(){
 
@@ -20,11 +21,25 @@ public class Checking {
         this.customerSSN = customerSSN;
     }
 
+    public Checking(double balance, String customerSSN, double amount) {
+        this.balance = balance;
+        this.customerSSN = customerSSN;
+        this.amount = amount;
+    }
+
     public Checking(double balance, String customerSSN, String customerFirstName, String customerLastName) {
         this.balance = balance;
         this.customerSSN = customerSSN;
         this.customerFirstName = customerFirstName;
         this.customerLastName = customerLastName;
+    }
+
+    public double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(double amount) {
+        this.amount = amount;
     }
 
     public double getBalance() {
@@ -64,12 +79,12 @@ public class Checking {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Checking checking = (Checking) o;
-        return Double.compare(checking.balance, balance) == 0 && Objects.equals(customerSSN, checking.customerSSN) && Objects.equals(customerFirstName, checking.customerFirstName) && Objects.equals(customerLastName, checking.customerLastName);
+        return Double.compare(checking.balance, balance) == 0 && Double.compare(checking.amount, amount) == 0 && Objects.equals(customerSSN, checking.customerSSN) && Objects.equals(customerFirstName, checking.customerFirstName) && Objects.equals(customerLastName, checking.customerLastName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(balance, customerSSN, customerFirstName, customerLastName);
+        return Objects.hash(balance, customerSSN, customerFirstName, customerLastName, amount);
     }
 
     @Override
@@ -79,6 +94,7 @@ public class Checking {
                 ", customerSSN='" + customerSSN + '\'' +
                 ", customerFirstName='" + customerFirstName + '\'' +
                 ", customerLastName='" + customerLastName + '\'' +
+                ", amount=" + amount +
                 '}';
     }
 }

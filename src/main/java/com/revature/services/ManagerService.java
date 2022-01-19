@@ -25,6 +25,10 @@ public class ManagerService {
         return managerDAO.addChecking(checking);
     }
 
+    public boolean addCustomerSavings(Savings savings){
+        return managerDAO.addSavings(savings);
+    }
+
     public List<Checking> findAllChecking() {
         return managerDAO.findAllChecking();
     }
@@ -33,7 +37,16 @@ public class ManagerService {
         return managerDAO.findAllSavings();
     }
 
+    public boolean deleteCustomerSavings(Savings savings){
+        return managerDAO.deleteSavings(savings);
+    }
+
+    public boolean deleteCustomerChecking(Checking checking){
+        return managerDAO.deleteChecking(checking);
+    }
+
     public List<Customer> findAllCustomers(){
         return managerDAO.findAllCustomers();
     }
+
 }

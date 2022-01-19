@@ -39,14 +39,15 @@ public class CustomerDAOImpl implements CustomerDAO{
     public boolean accountRequest(AccountRequest request) {
         try (Connection conn = ConnectionUtil.getConnection()){
 
-            String sql = "INSERT INTO requests (checking, savings, user_ssn)" +
-                    "VALUES (?, ?, ?);";
+            String sql = "INSERT INTO requests (checking, savings, user_ssn, initial_depoist)" +
+                    "VALUES (?, ?, ?, ?);";
 
             PreparedStatement statement = conn.prepareStatement(sql);
 
             statement.setBoolean(1, request.isChecking());
             statement.setBoolean(2, request.isSavings());
             statement.setString(3, request.getUser_ssn());
+            statement.setDouble(4,request.getInitialDeposit());
 
             statement.execute();
 

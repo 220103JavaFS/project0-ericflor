@@ -30,7 +30,7 @@ public class ManagerDAO {
                 requests.setChecking(result.getBoolean("checking"));
                 requests.setSavings(result.getBoolean("savings"));
                 requests.setUser_ssn(result.getString("user_ssn"));
-
+                requests.setInitialDeposit(result.getDouble("initial_depoist"));
 
                 list.add(requests);
             }
@@ -132,6 +132,27 @@ public class ManagerDAO {
         return new ArrayList<Checking>();
     }
 
+    public boolean addSavings(Savings savings){
+        try(Connection conn = ConnectionUtil.getConnection()){
+
+
+            String sql = "INSERT INTO savings (balance, customer_ssn) " +
+                    "VALUES (?, ?);";
+
+            PreparedStatement statement = conn.prepareStatement(sql);
+
+            statement.setDouble(1, savings.getBalance());
+            statement.setString(2, savings.getCustomerSSN());
+
+            statement.execute();
+
+            return true;
+
+        }catch (SQLException e){
+            return false;
+        }
+    }
+
     public List<Savings> findAllSavings() {
         try(Connection conn = ConnectionUtil.getConnection()){
 
@@ -170,6 +191,44 @@ public class ManagerDAO {
             e.printStackTrace();
         }
         return new ArrayList<Savings>();
+    }
+
+    public boolean deleteSavings(Savings savings){
+        try(Connection conn = ConnectionUtil.getConnection()){
+
+
+            String sql = "DELETE FROM savings WHERE customer_ssn = ?;";
+
+            PreparedStatement statement = conn.prepareStatement(sql);
+
+            statement.setString(1, savings.getCustomerSSN());
+
+            statement.execute();
+
+            return true;
+
+        }catch (SQLException e){
+            return false;
+        }
+    }
+
+    public boolean deleteChecking(Checking checking){
+        try(Connection conn = ConnectionUtil.getConnection()){
+
+
+            String sql = "DELETE FROM checking WHERE customer_ssn = ?;";
+
+            PreparedStatement statement = conn.prepareStatement(sql);
+
+            statement.setString(1, checking.getCustomerSSN());
+
+            statement.execute();
+
+            return true;
+
+        }catch (SQLException e){
+            return false;
+        }
     }
 
     public List<Customer> findAllCustomers() {

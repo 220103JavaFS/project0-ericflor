@@ -11,7 +11,7 @@ public class Customer extends User {
     private String ssn;
     private String firstName;
     private String lastName;
-   // private Checking checking;
+    // private Checking checking;
     //private Savings savings;
 
     public Customer (){

@@ -14,7 +14,7 @@ public class LoginDAO{
         // passed through the post request to /login
         try(Connection conn = ConnectionUtil.getConnection()){
 
-            String sql = "SELECT username FROM users WHERE username = ?;";
+            String sql = "SELECT user_name FROM users WHERE user_name = ?;";
 
             PreparedStatement statement = conn.prepareStatement(sql);
 
@@ -31,24 +31,24 @@ public class LoginDAO{
         return null;
     }
 
-//    public String findPassword(String password) {
-//        try(Connection conn = ConnectionUtil.getConnection()){
-//
-//            String sql = "SELECT user_password FROM users WHERE user_password = ?;";
-//
-//            PreparedStatement statement = conn.prepareStatement(sql);
-//
-//            User user = new User();
-//
-//            statement.setString(1, user.getPassword());
-//
-//            return password;
-//
-//
-//        }catch (SQLException e){
-//            e.printStackTrace();
-//        }
-//        return null;
-//    }
+    public String findPassword(String password) {
+        try(Connection conn = ConnectionUtil.getConnection()){
+
+            String sql = "SELECT user_password FROM users WHERE user_password = ?;";
+
+            PreparedStatement statement = conn.prepareStatement(sql);
+
+            User user = new User();
+
+            statement.setString(1, user.getPassword());
+
+            return password;
+
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
 

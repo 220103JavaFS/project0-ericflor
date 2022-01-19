@@ -1,12 +1,12 @@
 package com.revature.controllers;
 
 import com.revature.models.accounts.Checking;
+import com.revature.models.accounts.Savings;
 import com.revature.models.users.Customer;
 import com.revature.services.ManagerService;
 import io.javalin.Javalin;
 import io.javalin.http.Handler;
 
-import static com.revature.Roles.Role.MANAGER;
 
 public class ManagerController extends Controller{
 
@@ -45,6 +45,19 @@ public class ManagerController extends Controller{
         }
     };
 
+    Handler addSavings = (ctx) ->{
+        if(ctx.req.getSession(false)!=null){
+            Savings savings = ctx.bodyAsClass(Savings.class);
+            if(managerService.addCustomerSavings(savings)){
+                ctx.status(201);
+            }else {
+                ctx.status(400);
+            }
+        }else {
+            ctx.status(401);
+        }
+    };
+
     Handler getChecking = (ctx) ->{
         if(ctx.req.getSession(false)!=null) { //getSession(false) will only return a Session object if the client
             //sent a cookie along with the request that matches an open session.
@@ -56,8 +69,7 @@ public class ManagerController extends Controller{
     };
 
     Handler getSavings = (ctx) ->{
-        if(ctx.req.getSession(false)!=null) { //getSession(false) will only return a Session object if the client
-            //sent a cookie along with the request that matches an open session.
+        if(ctx.req.getSession(false)!=null) {
             ctx.json(managerService.findAllSavings());
             ctx.status(200);
         }else {
@@ -65,9 +77,36 @@ public class ManagerController extends Controller{
         }
     };
 
+    Handler deleteSavings = (ctx) ->{
+
+        if(ctx.req.getSession(false)!=null){
+           Savings savings = ctx.bodyAsClass(Savings.class);
+            if(managerService.deleteCustomerSavings(savings)){
+                ctx.status(201);
+            }else {
+                ctx.status(400);
+            }
+        }else {
+            ctx.status(401);
+        }
+    };
+
+    Handler deleteChecking = (ctx) ->{
+
+        if(ctx.req.getSession(false)!=null){
+            Checking checking = ctx.bodyAsClass(Checking.class);
+            if(managerService.deleteCustomerChecking(checking)){
+                ctx.status(201);
+            }else {
+                ctx.status(400);
+            }
+        }else {
+            ctx.status(401);
+        }
+    };
+
     Handler getCustomers = (ctx) ->{
-        if(ctx.req.getSession(false)!=null) { //getSession(false) will only return a Session object if the client
-            //sent a cookie along with the request that matches an open session.
+        if(ctx.req.getSession(false)!=null) {
             ctx.json(managerService.findAllCustomers());
             ctx.status(200);
         }else {
@@ -82,6 +121,9 @@ public class ManagerController extends Controller{
         //app.get("/managers/requests", getRequests, MANAGER); // how to do this????
         app.get("/managers", getManagers);
         app.post("/managers/checking", addChecking);
+        app.post("/managers/savings", addSavings);
+        app.post("/savings/delete", deleteSavings);
+        app.post("/checking/delete", deleteChecking);
         app.get("/managers/checking", getChecking);
         app.get("/managers/savings", getSavings);
         app.get("/managers/customers", getCustomers);

@@ -1,12 +1,11 @@
 package com.revature.controllers;
 
-
 import com.revature.models.users.User;
+import com.revature.models.users.UserDTO;
 import com.revature.services.LoginService;
 import io.javalin.Javalin;
 import io.javalin.http.Handler;
 
-import static com.revature.Roles.Role.MANAGER;
 
 
 public class LoginController extends Controller {
@@ -27,9 +26,19 @@ public class LoginController extends Controller {
     };
 
 
+    private Handler logout = (ctx) -> {
+        if(ctx.req.getSession(false) == null) {
+            ctx.status(400); //cannot log out if you never logged in the first place
+        } else {
+            ctx.req.getSession().invalidate();
+            ctx.status(200);
+        }
+    };
+
+
     @Override
     public void addRoutes(Javalin app) {
         app.post("/login", login);
-        //app.post("/manager/login", login, MANAGER); how to do this???
+        app.post("/logout", logout);
     }
 }
