@@ -49,20 +49,23 @@ public class CustomerController extends Controller{
         }
     };
 
-    Handler passwordEncrypt = (ctx)->{
-        if(ctx.req.getSession(false)!=null){
-            Customer customer = ctx.bodyAsClass(Customer.class);
-            if(customerService.encryptPassword(customer)){
+//    private Handler encryptPassword = (ctx)->{
+//        if(ctx.req.getSession(false)!=null) {
+//            Customer customer = ctx.bodyAsClass(Customer.class);
+//            String email;
+//
+//
+//            if(customerService.ePassword(email, login.password)){
+//                ctx.status(200);
+//            }else{
+//                ctx.status(400);
+//            }
+//        }else {
+//            ctx.status(401);
+//        }
+//    };
 
-                ctx.status(201);
-            }else {
-                ctx.status(400);
-            }
-        }else {
-            ctx.status(401);
-        }
 
-    };
 
     @Override
     public void addRoutes(Javalin app) {
@@ -70,7 +73,6 @@ public class CustomerController extends Controller{
         //app.post("/register", newCustomer, Role.CUSTOMER); // how to do this?
         app.post("/register", newCustomer);
         app.post("/request", newRequest);
-        app.post("/encrypt", passwordEncrypt);
        // app.post("/customer/request", newRequest, CUSTOMER); // how to do this?
     }
 }

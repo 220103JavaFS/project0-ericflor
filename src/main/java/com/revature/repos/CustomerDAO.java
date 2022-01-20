@@ -14,6 +14,10 @@ public interface CustomerDAO {
 
     public boolean accountRequest(AccountRequest request);
 
-    public boolean encryptPassword(Customer customer);
+    public String verifyPassword(String username);
+
+    public boolean encryptPassword(String username, String password);
+
+    public String getPassword(String username);
 
 }

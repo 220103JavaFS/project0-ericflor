@@ -58,15 +58,36 @@ public class CustomerDAOImpl implements CustomerDAO{
     }
 
     @Override
-    public boolean encryptPassword(Customer customer) {
+    public String verifyPassword(String username) {
+        try(Connection conn = ConnectionUtil.getConnection()){
+            String sql = "SELECT pass_word FROM customers WHERE user_name = ?;";
+
+            PreparedStatement statement = conn.prepareStatement(sql);
+
+            statement.setString(1, username);
+
+            ResultSet result = statement.executeQuery();
+
+            while (result.next()) {
+                return result.getString("pass_word");
+            }
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public boolean encryptPassword(String password, String username) {
         try(Connection conn = ConnectionUtil.getConnection()){
             String sql = "UPDATE customers SET pass_word = ? WHERE user_name = ?;";
 
             PreparedStatement statement = conn.prepareStatement(sql);
 
-            statement.setString(1, customer.getPassword());
-            statement.setString(2, customer.getUsername());
-
+            //statement.setString(1, username);
+            statement.setString(1, password);
+            statement.setString(2, username);
 
             statement.execute();
 
@@ -77,5 +98,28 @@ public class CustomerDAOImpl implements CustomerDAO{
         }
         return false;
     }
+
+    @Override
+    public String getPassword(String username) {
+        try(Connection conn = ConnectionUtil.getConnection()){
+            String sql = "SELECT pass_word FROM customers WHERE user_name = ?;";
+
+            PreparedStatement statement = conn.prepareStatement(sql);
+
+            statement.setString(1, username);
+
+            ResultSet result = statement.executeQuery();
+
+            if(result.next()){
+                return result.getString("pass_word");
+            }else{
+                return null;
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 
 }

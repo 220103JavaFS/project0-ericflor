@@ -21,11 +21,11 @@ public class Checking {
         this.customerSSN = customerSSN;
     }
 
-    public Checking(double balance, String customerSSN, double amount) {
-        this.balance = balance;
-        this.customerSSN = customerSSN;
-        this.amount = amount;
-    }
+//    public Checking(double balance, String customerSSN, double amount) {
+//        this.balance = balance;
+//        this.customerSSN = customerSSN;
+//        this.amount = amount;
+//    }
 
     public Checking(double balance, String customerSSN, String customerFirstName, String customerLastName) {
         this.balance = balance;

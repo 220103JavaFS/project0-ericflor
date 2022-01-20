@@ -2,6 +2,7 @@ package com.revature.models.users;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import java.util.Objects;
 
@@ -19,7 +20,10 @@ public class Customer extends User {
     }
 
     public Customer(String username, String password, String ssn, String firstName, String lastName) {
-        super(username, password);
+        super(username);
+        String x = BCrypt.hashpw(password, BCrypt.gensalt());
+
+        this.password = x;
         this.ssn = ssn;
         this.firstName = firstName;
         this.lastName = lastName;

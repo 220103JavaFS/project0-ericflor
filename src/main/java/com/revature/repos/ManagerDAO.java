@@ -247,8 +247,8 @@ public class ManagerDAO {
                 customers.setSsn(result.getString("ssn"));
                 customers.setFirstName(result.getString("first_name"));
                 customers.setLastName(result.getString("last_name"));
-                customers.setUsername(result.getString("user_name"));
-                customers.setPassword(result.getString("pass_word"));
+//                customers.setUsername(result.getString("user_name"));
+//                customers.setPassword(result.getString("pass_word"));
 
 
                 list.add(customers);

@@ -22,6 +22,9 @@ dependencies {
     implementation group: 'org.postgresql', name: 'postgresql', version: '42.3.1'
     // https://mvnrepository.com/artifact/org.springframework.security/spring-security-core
     implementation group: 'org.springframework.security', name: 'spring-security-core', version: '5.6.1'
+    //JBCrypt
+    // https://mvnrepository.com/artifact/org.mindrot/jbcrypt
+    implementation group: 'org.mindrot', name: 'jbcrypt', version: '0.4'
 }
 
 test {

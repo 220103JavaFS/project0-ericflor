@@ -1,13 +1,11 @@
 package com.revature.services;
 
-import com.revature.models.accounts.Checking;
 import com.revature.models.users.AccountRequest;
 import com.revature.models.users.Customer;
 import com.revature.repos.CustomerDAO;
 import com.revature.repos.CustomerDAOImpl;
-import org.springframework.security.crypto.bcrypt.BCrypt;
 
-import java.util.List;
+
 
 public class CustomerService {
 
@@ -21,9 +19,6 @@ public class CustomerService {
         return customerDAO.accountRequest(request);
     }
 
-    public boolean encryptPassword(Customer customer){
-        String hashedPW = BCrypt.hashpw(customer.getPassword(), BCrypt.gensalt());
-        return customerDAO.encryptPassword(customer);
-    }
+
 
 }

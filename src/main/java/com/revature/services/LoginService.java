@@ -1,24 +1,26 @@
 package com.revature.services;
 
-import com.revature.repos.LoginDAO;
+import org.mindrot.jbcrypt.BCrypt;
+import com.revature.repos.CustomerDAO;
+import com.revature.repos.CustomerDAOImpl;
+
 
 public class LoginService {
 
-    private LoginDAO loginDAO = new LoginDAO();
+    CustomerDAO customerDAO = new CustomerDAOImpl();
 
-    public boolean login(String username, String password){
-        if(username.equals(loginDAO.findUsername(username)) && password.equals(loginDAO.findPassword(password))){
-            return true;
-        }else{
-            return false;
-        }
+    public boolean login(String userName, String passWord) {
+
+        String hashedPW = BCrypt.hashpw(passWord, BCrypt.gensalt());
+
+        String dbPassword = customerDAO.verifyPassword(userName);
+
+        return BCrypt.checkpw(dbPassword, hashedPW);
     }
 
-    public boolean logout(String username, String password){
-        if(username.equals("username")){
-            return true;
-        }else{
-            return false;
-        }
+
+    public boolean encryptPassword(String userName, String passWord){
+        String hashedPW = BCrypt.hashpw(passWord, BCrypt.gensalt());
+        return customerDAO.encryptPassword(userName, hashedPW);
     }
 }

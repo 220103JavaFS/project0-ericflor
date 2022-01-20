@@ -1,5 +1,6 @@
 package com.revature.repos;
 
+import com.revature.models.users.Customer;
 import com.revature.models.users.User;
 import com.revature.utils.ConnectionUtil;
 
@@ -14,13 +15,13 @@ public class LoginDAO{
         // passed through the post request to /login
         try(Connection conn = ConnectionUtil.getConnection()){
 
-            String sql = "SELECT user_name FROM users WHERE user_name = ?;";
+            String sql = "SELECT user_name FROM customers WHERE user_name = ?;";
 
             PreparedStatement statement = conn.prepareStatement(sql);
 
-            User user = new User();
+            Customer cust = new Customer();
 
-            statement.setString(1, user.getUsername());
+            statement.setString(1, cust.getUsername());
 
             return username;
 
@@ -34,13 +35,13 @@ public class LoginDAO{
     public String findPassword(String password) {
         try(Connection conn = ConnectionUtil.getConnection()){
 
-            String sql = "SELECT user_password FROM users WHERE user_password = ?;";
+            String sql = "SELECT user_password FROM customers WHERE user_password = ?;";
 
             PreparedStatement statement = conn.prepareStatement(sql);
 
-            User user = new User();
+            Customer cust = new Customer();
 
-            statement.setString(1, user.getPassword());
+            statement.setString(1, cust.getPassword());
 
             return password;
 

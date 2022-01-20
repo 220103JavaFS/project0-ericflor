@@ -1,19 +1,31 @@
 package com.revature.models.users;
 
+import com.revature.App;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
 public class User {
 
+
     private String username;
-    private String password;
+    public String password;
 
     public User (){
 
     }
 
+    public User(String username){
+        this.username = username;
+    }
+
     public User(String username, String password) {
         this.username = username;
-        this.password = BCrypt.hashpw(password, BCrypt.gensalt());
+
+        String x = BCrypt.hashpw(password, BCrypt.gensalt());
+
+        this.password = x;
+
     }
 
     public String getUsername() {
